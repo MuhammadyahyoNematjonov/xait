@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 import User from './models/User.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-
+import express from "express"
+let app = express()
+const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -116,7 +118,7 @@ bot.on('callback_query', async (ctx) => {
   const os = ctx.callbackQuery.data.replace('os_', '');
 
   const fileExtensions = {
-    windows: 'ps1',  // Windows uchun PowerShell skript
+    windows: 'ps1',  
     ubuntu: 'sh',
     macos: 'sh',
   };
@@ -136,3 +138,9 @@ bot.on('callback_query', async (ctx) => {
 });
 
 bot.launch();
+
+
+
+app.listen(PORT, () => {
+  console.log(`Server port ${PORT} da ishga tushdi`);
+});
